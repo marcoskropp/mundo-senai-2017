@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.min.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="utf-8"/>
+    </head>
+    <body class="blue lighten-2">
+        <div class="container center-align">
+            <h3>Fórmula Robson</h3>
+            <a id="www" class="waves-effect waves-light btn-large"><img class="responsive-img" src="img/forward.png"></a><br><br>
+            <a id="aaa" class="waves-effect waves-light btn-large"><img class="responsive-img" src="img/left.png"></a>
+            <a id="jjj" class="waves-effect waves-light btn-large"><img class="responsive-img" src="img/stop.png"></a>
+            <a id="ddd" class="waves-effect waves-light btn-large"><img class="responsive-img" src="img/right.png"></a><br><br>
+            <a id="sss" class="waves-effect waves-light btn-large"><img class="responsive-img" src="img/backward.png"></a>
+            <br>
+            <a class="waves-effect waves-light btn-large left" href="index.html">Voltar</a>
+        </div>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#www").click(function () {
+                    enviarDados("www");
+                });
+                $("#aaa").click(function () {
+                    enviarDados("aaa");
+                });
+                $("#jjj").click(function () {
+                    enviarDados("jjj");
+                });
+                $("#ddd").click(function () {
+                    enviarDados("ddd");
+                });
+                $("#sss").click(function () {
+                    enviarDados("sss");
+                });
+                function enviarDados(comando) {
+                    console.log(comando);
+                    $.ajax({
+                        url: 'http://192.168.43.50/?function=' + comando,
+                        dataType: 'html',
+                        type: 'get',
+                        beforeSend: function () {
+                            $('#resposta').html("<div class='progress'><div class='indeterminate'></div></div>").fadeIn(1000);
+                        },
+                        success: function (retorno) {
+                            $('#resposta').fadeOut(function () {
+                                $('#resposta').html(retorno).fadeIn();
+                            });
+                        }
+                    });
+                }
+                $("body").keydown(function (event) {
+                    // A == 65  W == 87 S == 83 D == 68 SPACE == 32 Q == 81 E == 69 Z == 90 C == 67
+                    var comando = '';
+                    switch (event.which) {
+                        case 32:
+                            comando = "jjj";
+                            console.log(comando);
+                            break;
+                        case 65:
+                            comando = "aaa";
+                            console.log(comando);
+                            break;
+                        case 87:
+                            comando = "www";
+                            console.log(comando);
+                            break;
+                        case 83:
+                            comando = "sss";
+                            console.log(comando);
+                            break;
+                        case 68:
+                            comando = "ddd";
+                            console.log(comando);
+                            break;
+                    }
+                    if (comando == '') {
+                    } else {
+                        $.ajax({
+                            url: 'http://192.168.43.50/?function=' + comando,
+                            dataType: 'html',
+                            type: 'get',
+                            beforeSend: function () {
+                                $('#resposta').html("<div class='progress'><div class='indeterminate'></div></div>").fadeIn(1000);
+                            },
+                            success: function (retorno) {
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+
+    </body>
+</html>
