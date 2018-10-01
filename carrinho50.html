@@ -23,21 +23,21 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#www").click(function () {
-                    enviarDados("www");
+                    mover("www");
                 });
                 $("#aaa").click(function () {
-                    enviarDados("aaa");
+                    mover("aaa");
                 });
                 $("#jjj").click(function () {
-                    enviarDados("jjj");
+                    mover("jjj");
                 });
                 $("#ddd").click(function () {
-                    enviarDados("ddd");
+                    mover("ddd");
                 });
                 $("#sss").click(function () {
-                    enviarDados("sss");
+                    mover("sss");
                 });
-                function enviarDados(comando) {
+                function mover(comando) {
                     console.log(comando);
                     $.ajax({
                         url: 'http://192.168.43.50/?function=' + comando,
